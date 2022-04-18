@@ -1,0 +1,525 @@
+<html>  
+  <head>  
+        <meta charset="utf-8">  
+        <title>Public School in China</title>  
+  </head> 
+<style>
+    body {
+      height: 100%;
+      width: 100%;
+    }
+
+    .tooltip {
+        position: absolute;
+        line-height: 1.5;
+        font-weight: 100;
+        font-family:"avenir next", Arial, sans-serif;
+        padding: 2px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #FFA500;
+        border-radius: 3px;
+        pointer-events: none;
+        z-index: 29999;
+      }
+
+    .tooltip p {
+        border:  1px;
+        padding: 1px;
+        font-size: 12px;
+    }
+
+    .main_header {
+        width: 90%;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 3%;
+        clear: left;
+    }
+
+    .header {
+        width: 90%;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 4%;
+        margin-bottom: 1%;
+        clear: left;
+    }
+
+    .sub_header {
+        width: 90%;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 2%;
+        margin-bottom: 1%;
+        clear: left; 
+    }
+
+    .footer {
+        font-size: 12px;
+        width: 90%;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 2%;
+        margin-bottom: 1%;
+        clear: left; 
+    }
+
+    .further {
+        font-size: 15px;
+        width: 90%;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 1%;
+        margin-bottom: 3%;
+        clear: left; 
+        font-weight: bold;
+    }
+
+    .inner_block {
+        width: 90%;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 0;
+        margin-bottom: 1%;
+        clear: left; 
+    }
+
+    .passage {
+        font-size: 14px;
+        display: block;
+        text-align: left;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .vis_panel {
+        height: 50%;
+        width: 90%;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        margin-bottom: 1%;
+    }
+
+    .block {
+        height: 5%;
+        width: 90%;
+        clear: left; 
+    }
+
+    #map {
+        height: 100%;
+        width: 50%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    #map_multi {
+        height: 140%;
+        width: 100%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    #barChart1 {
+        height: 100%;
+        width: 50%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 90%;
+      margin: 0 auto;
+      display: block;
+      text-align: center;
+      font-family:"avenir next", Arial, sans-serif;
+      float: left;
+      position: relative;
+    }
+
+    #chart1 {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    .color-controler1 {
+      width: 100%;
+      height: 10%;
+      padding: 1% 0 1% 0;
+      box-sizing: border-box;
+      position: relative;
+      float: left;
+    }
+
+    .color-controler1 ul{
+      max-width: 1000px;
+      margin: 0 auto;
+      clear: left; 
+      float: left; 
+      position: relative; 
+      left: 45%;
+      text-align: center;
+    }
+
+    .color-controler1 li{
+      line-height: 25px; 
+/*      margin: 0 5px; */
+      display: block; 
+      float: left; 
+      position: relative; 
+      right: 50%;
+      margin: auto 0.4em;
+      font-size: 11px;
+    }
+
+    .base1 text{
+      font-size: 10px;
+      font-family: 'Helvetica Neue',Arial,freesans,sans-serif;
+    }
+
+    text.part-values {
+      font-size: 11px;
+      font-family: 'Helvetica Neue',Arial,freesans,sans-serif;
+    }
+
+    .parts1 rect {
+      opacity: 0.8;
+    }
+
+    .part-bars1 {
+      cursor: pointer;
+    }
+
+    .axis text{
+      font-family: 'Helvetica Neue',Arial,freesans,sans-serif;
+    }
+
+
+    .x_axis text{
+      font-size: 10px;
+    }
+
+    .y_axis .tick line {
+      stroke: silver;
+    }
+
+    .xaxis1 text{
+      font-size: 11px;
+    }
+
+    .xaxis2 text{
+      font-size: 11px;
+    }
+    .yaxis1 .tick line {
+      stroke: silver;
+    }
+
+    .yaxis2 .tick line {
+      stroke: silver;
+    }
+
+    .yaxis-right1 .tick line {
+      stroke: #ddd;
+      stroke-dasharray: 2,2;
+    }
+
+    .yaxis-right2 .tick line {
+      stroke: #ddd;
+      stroke-dasharray: 2,2;
+    }
+
+    #barChart2 {
+        height: 100%;
+        width: 33%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        margin: 0 auto;
+        float: left;
+        position: relative;
+    }
+
+    #chart2 {
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+
+    #map_multi2 {
+        height: 100%;
+        width: 66%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    #lineContainer {
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+        float: left;
+    }
+
+    #multiLineContainer {
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+        float: left;
+    }
+
+    #map_multi3 {
+        height: 100%;
+        width: 50%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    #map_multi4 {
+        height: 100%;
+        width: 50%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+    #map_multi5 {
+        height: 140%;
+        width: 100%;
+        margin-left: 0px;
+        display: block;
+        text-align: center;
+        font-family:"avenir next", Arial, sans-serif;
+        float: left;
+        position: relative;
+    }
+
+</style>
+<body>
+  <div class="main_header">
+    <h2>China Education 101</h2>
+    <h4>Understanding the Student Population and Education Resource Distribution in China</h4>
+  </div>
+  <div class="inner_block">
+    <div class="passage">
+      <p>Have you wanted to learn more about education in China but do not know where to start? How many students are there? How are these students distributed? What is the education funding per student? What is the student to teacher ratio in different provinces? This interactive data analysis will give a general overview of these questions.</p>
+    </div>
+  </div>
+  <div class="header">
+    <h3>Students Population and Distribution</h3>
+  </div>
+  <div class="sub_header">
+    <div class="passage">
+      <p>The historic data on the number of students per million population is displayed in the stacked bar chart below. Predominately, the overall number of students in China has stayed constant, spiking in 1996-1998, and experiencing a slight drop after 2011. Breaking down the student population by level of education, clearly indicates that the student population varies widely across each level. While there have been slight, constant decreases of the number of students in elementary, middle and high school, students in pre-education have shown steady increases by approximately 1K students per year since 2011. The number of students enrolled in higher education has grown markedly since 2001, but in the past three years its growth has slowed to less than 1K a year.</p>
+      <p>The number of students varies widely by Province in China. In Guizhou (贵州), the student population reaches close to 261K while the adjacent province of JiangSu (江苏) has only 175K students. Provinces in the northeastern parts of China such as HeiLongJiang (黑龙江)and Jilin (吉林) have, on average, fewer students. Provinces in the Southwestern section of China have more students and thus are shaded more darkly.</p>
+    </div>
+  </div>
+  <div class="vis_panel">
+    <div id="barChart1">
+      <div class="chart-container" id="chartContainer1" >
+          <svg id="chart1"></svg>
+          <div id="info1" class="tooltip">
+            <div class="desc"></div>
+          </div>
+      </div>
+      <div id="colorControler1" class="color-controler1"></div>
+    </div>
+    <div id="map" class="map">
+    </div>
+  </div>
+
+  <div class="sub_header">
+    <div class="passage">
+      <p>To understand the differences in student population across China, it’s important to consider the country’s age composition. Though 0-14-year-olds still make up more of the population (230M) than those over the age of 65 (150M), 65+ year-olds are increasing consistently by 6M each year—a rate almost double the number of 0-14-year-olds.</p>
+      <p>China’s population is aging rapidly and most of this aging population (65+) is gathered along the eastern coasts and cities. Historically, there have been fewer students along the east and a higher percentage of students in the more rural parts of eastern China. In Sinkiang (新疆), 0-14-year-olds make up nearly 22% of the population and in Tibet (西藏) they make up nearly a quarter of the population.</p>
+    </div>
+  </div>
+    
+  <div class="vis_panel">
+    <div id="barChart2">
+      <div class="chart-container" id="chartContainer2" >
+          <svg id="chart2"></svg>
+          <div id="info2" class="tooltip">
+            <div class="desc"></div>
+          </div>
+      </div>
+      <div id="colorControler2" class="color-controler1"></div>
+    </div>
+    <div id="map_multi2" class="map">
+    </div>
+  </div>
+
+
+  <div class="sub_header">
+    <h4>A Deeper Dive in to Number of Students at Different Education Levels</h4>  
+      <div class="passage">
+        <p>By breaking down the student population by province and education level several trends appear.</p><p>The number of students entering Elementary school has reached an all-time high throughout China. In western provinces such as Sinkiang (新疆), Tibet (西藏), Guizhou (贵州), and Guangxi there are nearly 100K elementary school students per million people. This statistic is reasonable given the percentage of children that make up these provinces. The population of elementary-level students outweighs the number of students in middle, high school, and college. The heat maps further reveal that although there are more students enrolled in lower education in the western, relatively underdeveloped provinces, these provinces have very few students enrolled in higher education—in Qinghai (青海) as few as 13K students. Since these western provinces are less affluent and developed, there are fewer institutions for higher education. Most students attending college move to the Eastern coast to attend one of the many established universities in cities like Beijing and Shanghai.</p>
+      </div>
+  </div>
+
+  <div id="eduFund" class="vis_panel">
+    <div id="map_multi" class="map">
+    </div>
+  </div>
+  <div class="block">
+  </div>
+  <div class="header">
+    <h3>Education Resource Distribution</h3>
+  </div>
+  <div class="inner_block">
+    <h4>A Look in to Funding for Student Education</h4>
+    <div class="passage">
+      <p>Funding towards student’s education in China has consistently increased since the beginning of the 21st century. Since 2011, funding per student has increased at a constant rate from 12.4 thousand RMB ($1,805 USD) to 14.5 thousand RMB ($2,110 USD) in 2015.</p><p>Funding for student’s education, like number of students, is remarkably varied across China’s provinces. In more affluent, urbanized cities such as Beijing and Shanghai students have over 50K RMB ($7,278 USD) set aside for education. These cities are some of the wealthiest across China which is reflected by the amount the government can allocate towards student education. Throughout most of the middle and southern parts of China the average student is given 11K RMB ($1,601 USD) designated for education. This is less than what some of the of the wealthier cities can provide for their students. While Tibet (西藏) is also comparatively less wealthy, the average student receives 35.8K RMB ($5,211 USD) for education—one of the highest levels in the country. In western provinces like Tibet (西藏) and Qinghai (青海) students receive high-levels of funding through subsidies from the government. These subsidies allow students from ethnic minorities—who often need more financial and academic support—a better chance at a good education. 
+</p>
+    </div>
+  </div>
+  <div class="vis_panel">
+    <div id="lineContainer">
+    </div>
+    <div id="map_multi3" class="map">
+    </div>
+  </div>
+
+  <div class="sub_header">
+    <h4>Student to Teacher Ratio in China</h4>
+    <div class="passage">
+      <p>The average student to teacher ratio has decreased from 20:1 in 2000 to 16:1 in 2016. Although the average across all levels of education has decreased, breaking these statistics down more specifically reveal that at some levels the student teacher ratio has stayed the same or even increased slightly. Higher education ratios have been consistently and slowly growing since 2006; this could be due to the increase demand and increased number of students attending college across the country. High school and middle school student teacher ratios have decreased slightly after spiking to 18 and 19 respectively, in 2003, but remain at a similar level to historic trends. The two levels of education that have seen the most drastic decreases are Pre-Education and Vocational Education. Pre-Education spiked sharply in 2001 reaching an all-time high of 35 students for every teacher. Since 2001 Pre-Education has decreased rapidly to approximately 20:1 in 2016, however, it remains the highest student ratio among the different categories of education. Vocational education also experienced a spike in 2010 reaching 26:1 but has since decreased to about 20:1. Special Education ratios have historically stayed low, but in the last three years the ratio has increased by 1.28 students.</p>
+    </div>
+  </div>
+  <div class="vis_panel">
+    <div id="multiLineContainer">
+    </div>
+    <div id="map_multi4" class="map">
+    </div>
+  </div>
+  <div class="sub_header">
+ <!--    <h4>A Deeper Dive in to Number of Students at Different Education Levels</h4>   -->
+      <div class="passage">
+        <p>The student to teacher ratio typically varies in accordance with the population of students in each province. In Guanxi (广西) a province with 238K students for every million people, the student teacher ratio is one of the highest:  19 students for every teacher. Likewise, Ji Lin (吉林) a province with only 136K students, has a lower student teacher ratio of 11.8 students for every teacher. In some cases like Xin Jiang (新疆), however, the student population is high (222K) but keeps a low student to teacher ratio of 13.7 students per teacher. </p>
+      </div>
+  </div> 
+  <div class="sub_header">
+    <h4>A Deeper Dive in to the Student to Teacher Ratio</h4>  
+  </div>
+  <div class="vis_panel">
+    <div id="map_multi5" class="map">
+    </div>
+  </div>
+  <div class="inner_block">
+ <!--    <h4>A Deeper Dive in to Number of Students at Different Education Levels</h4>   -->
+      <div class="passage">
+        <p>Breaking down the student teacher ratio even further, it becomes clear that both level of education and geographic location play a role in shaping the ratio of students to teachers across China.</p> <p>The increasing number of 0-14-year-olds in the Southern region of China has contributed to a higher student teacher ratio in several of China’s southern provinces. As shown by the heat map above, the ratio for middle and high school education are relatively low across most of the country, hovering around 13:1. The highest student to teacher ratio lies in vocational education. In Qinghai (青海) and Guanxi (广西) the ratio for vocational education is over 30:1. This could be due, in part, to the higher demand and popularity of vocational education especially in the last few years. The student teacher ratio for Higher Education across China varies little by province—approximately 17:1.</p>
+      </div>
+  </div> 
+
+    <div class="footer">
+ <!--    <h4>A Deeper Dive in to Number of Students at Different Education Levels</h4>   -->
+      <div class="passage">
+        <p>* Exchange Rate ¥6.87 RMB for every $1 US dollar 
+        <br>* Data used in this visualization is sourced from Chinese National Bureau of Statistics.
+        <br>* All data used in maps of this visualization is from 2016.</p>
+      </div>
+  </div>
+  <div class="further">
+    <p>If you would like to learn more about Education in China, <a href='http://mo.jiemodui.com/insight'>this link </a>will lead you to explore further.</p>
+  </div>
+
+<script src="d3.v4.min.js"></script>
+<script src="colorbrewer.js"></script>
+<script src="map_multi.js"></script>
+<script src="stackedBarChart.js"></script>
+<script src="stackedBarChart2.js"></script>
+<script src="lineChart.js"></script>
+<script src="MultiLineChart.js"></script>  
+<script type="text/javascript">
+  
+  d3.queue()
+    .defer(d3.csv, "./EducationFunds.csv")
+    .defer(d3.csv, "./No.OfEnrolments.csv")
+    .defer(d3.csv, "./AgeCompositionOfPopulation.csv")
+    // .defer(d3.csv, "./NoOfSchool.csv")
+    .defer(d3.csv, "./StudentTeacherRatio.csv")
+    .await(function(error, data1, data2, data3, data4){
+      if (error) throw error;
+      EduFundData=data1;
+      EnrolmentsData=data2;
+      AgeCompositionData=data3;
+      STRatioData=data4;
+      drawVis(1);
+      drawVis(2);
+      drawVis(3);
+      drawVis(4);
+  });
+
+  function drawVis(ind){
+
+    if (ind==1) {
+      visData=EduFundData
+      topicVar="Edu Fund"
+      drawLines()
+    } else if (ind==2) {
+      visData=EnrolmentsData
+      topicVar="No. of Students"
+      drawStackedBarChart1()
+    } else if (ind==3) {
+      visData=AgeCompositionData
+      topicVar="Age Composition Of Population"
+      drawStackedBarChart2()
+    } else if (ind==4) {
+      visData=STRatioData
+      topicVar="StudentTeacherRatio"
+      drawMultiLines()
+    } else {
+      visData=EnrolmentsData
+      topicVar="No. of Students"
+    }
+    
+    
+  }
+
+</script>
+</body>  
+</html>
